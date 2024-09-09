@@ -1,17 +1,72 @@
 package ru.vel;
+import java.util.Scanner;
+import java.util.Set;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class Main {
-    public static void main(String[] args) {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
+    private final static Set<String> operations = Set.of("-", "+", "*", "/");
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            System.out.println("i = " + i);
+    public static void main(String[] args) {
+        int operand = 0;
+        String operation = "+";
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.print("Enter a number or command ('s' to stop, 'c' to clear): ");
+            String input = scanner.nextLine().trim();
+
+            if (input.equals("s")) {
+                break;
+            }
+
+            if (input.equals("c")) {
+                operand = 0;
+                operation = "+";
+                System.out.println("Calculation cleared. Current result: " + operand);
+                continue;
+            }
+
+            int operandInput;
+            try {
+                operandInput = parseOperand(input);
+            } catch (RuntimeException e) {
+                System.out.println(e.getMessage());
+                continue;
+            }
+
+            switch (operation) {
+                case "+" -> operand += operandInput;
+                case "-" -> operand -= operandInput;
+                case "*" -> operand *= operandInput;
+                case "/" -> {
+                    if (operandInput == 0) {
+                        System.out.println("Error: Division by zero.");
+                        continue;
+                    }
+                    operand /= operandInput;
+                }
+            }
+            System.out.println("Current result: " + operand);
+
+            System.out.print("Enter an operation (+, -, *, /): ");
+            operation = scanner.nextLine().trim();
+            while (!operations.contains(operation)) {
+                System.out.println("Invalid operation: " + operation);
+                System.out.print("Please enter a valid operation (+, -, *, /): ");
+                operation = scanner.nextLine().trim();
+            }
+        }
+        scanner.close();
+        System.out.println("Calculator stopped.");
+    }
+
+    private static int parseOperand(String input) {
+        try {
+            return Integer.parseInt(input);
+        } catch (NumberFormatException e) {
+            throw new RuntimeException("""
+                    We are lazy, so we work only with integers.
+                    Maybe you want to use double or long, but not this time, buddy!
+                    There's nothing like that in the task)""");
         }
     }
 }
