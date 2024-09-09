@@ -3,7 +3,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 public class Main {
-    private final static Set<String> operations = Set.of("-", "+", "*", "/");
+    private final static Set<String> OPERATIONS = Set.of("-", "+", "*", "/");
 
     public static void main(String[] args) {
         int operand = 0;
@@ -49,7 +49,7 @@ public class Main {
 
             System.out.print("Enter an operation (+, -, *, /): ");
             operation = scanner.nextLine().trim();
-            while (!operations.contains(operation)) {
+            while (!OPERATIONS.contains(operation)) {
                 System.out.println("Invalid operation: " + operation);
                 System.out.print("Please enter a valid operation (+, -, *, /): ");
                 operation = scanner.nextLine().trim();
