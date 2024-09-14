@@ -1,0 +1,8 @@
+2024-09-14 10:00:00 INFO Starting the application
+2024-09-14 10:01:00 ERROR Failed to connect to the database
+2024-09-14 10:02:00 INFO Application is running smoothly
+2024-09-14 10:03:00 WARN Low disk space
+2024-09-14 10:04:00 ERROR Unable to read configuration file
+2024-09-14 10:05:00 INFO Application shutdown initiated
+2024-09-14 10:06:00 ERROR Unexpected exception occurred
+2024-09-14 10:07:00 INFO Backup completed successfully
